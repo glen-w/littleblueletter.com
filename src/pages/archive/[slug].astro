@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const letters = await getCollection('letters');
+  return letters.map((letter) => ({
+    params: { slug: letter.data.originalSlug },
+    props: { letter },
+  }));
+}
+
+const { letter } = Astro.props;
+const { Content } = await render(letter);
+---
+
+<Base
+  title={letter.data.title}
+  description={letter.data.description}
+  path={`/archive/${letter.data.originalSlug}/`}
+>
+  <div class="wrap">
+    <article class="card letter">
+      <p class="crumb"><a href="/archive/">Archive</a></p>
+      <h1>{letter.data.title}</h1>
+      <div class="letter-body">
+        <Content />
+      </div>
+    </article>
+  </div>
+</Base>

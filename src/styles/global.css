@@ -1,0 +1,218 @@
+:root {
+  --lbl-sea: #81b3cd;
+  --lbl-ink: #111111;
+  --lbl-link: #336699;
+  --lbl-field: #dddddd;
+  --lbl-paper: #ffffff;
+  --lbl-button: #333333;
+  --lbl-max: 42rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--lbl-field);
+  background-image: url("/bg.png");
+  background-attachment: fixed;
+  color: var(--lbl-ink);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--lbl-link);
+}
+
+a:hover {
+  color: #000;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  background: #fff;
+  padding: 0.4rem 0.7rem;
+  z-index: 2;
+}
+
+.chrome {
+  text-align: center;
+  padding: 1rem 1rem 0.8rem;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.chrome .wordmark {
+  color: var(--lbl-sea);
+  font-family: Monaco, "Lucida Console", monospace;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.chrome nav {
+  margin-top: 0.6rem;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+}
+
+.chrome nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 1rem;
+}
+
+.chrome nav a {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  color: var(--lbl-link);
+  text-decoration: none;
+}
+
+.chrome nav a[aria-current='page'] {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.site {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  color: #555;
+  padding: 0 1rem 2.5rem;
+}
+
+.site a {
+  color: var(--lbl-link);
+}
+
+.sep {
+  margin: 0 0.45rem;
+  color: #999;
+}
+
+.title {
+  margin: 0.75rem 0 0.5rem;
+  font-family: Monaco, "Lucida Console", monospace;
+  font-weight: normal;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  color: var(--lbl-sea);
+}
+
+.crumb {
+  margin: 0 0 0.75rem;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+.wrap {
+  width: min(540px, 96%);
+  margin: 1.5rem auto 4rem;
+}
+
+.card {
+  background: var(--lbl-paper);
+  border-radius: 3px;
+  padding: 3rem 3.2rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  text-align: left;
+}
+
+.home {
+  text-align: center;
+}
+
+.logo {
+  width: 220px;
+  height: auto;
+}
+
+.tagline {
+  font-size: 1.15rem;
+  color: var(--lbl-ink);
+}
+
+.quiet {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.letter h1,
+.archive h1,
+.contact h1,
+.write h1 {
+  font-family: Monaco, "Lucida Console", monospace;
+  font-weight: normal;
+  color: var(--lbl-sea);
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+
+.letter-body img {
+  display: block !important;
+  float: none !important;
+  clear: both;
+  height: auto !important;
+  max-width: 100% !important;
+  margin: 0.75rem auto !important;
+}
+
+.letter-body hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 1.4rem 0;
+}
+
+.archive-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.archive-list li {
+  margin: 0.85rem 0;
+}
+
+.archive-list time {
+  display: block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.footer-links {
+  margin-top: 2rem;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 40em) {
+  body {
+    background-image: none;
+  }
+
+  .card {
+    padding: 1.6rem 1rem;
+  }
+}

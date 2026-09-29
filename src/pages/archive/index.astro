@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const letters = (await getCollection('letters')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+function sent(d: Date) {
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<Base
+  title="Archive"
+  description="Every Little Blue Letter, from October 2017 to March 2023."
+  path="/archive/"
+>
+  <div class="wrap">
+    <article class="card archive">
+      <h1>Archive</h1>
+      <p>{letters.length} letters, October 2017 to March 2023.</p>
+      <ol class="archive-list">
+        {
+          letters.map((letter) => (
+            <li>
+              <a href={`/archive/${letter.data.originalSlug}/`}>{letter.data.title}</a>
+              <time datetime={letter.data.date.toISOString().slice(0, 10)}>{sent(letter.data.date)}</time>
+            </li>
+          ))
+        }
+      </ol>
+    </article>
+  </div>
+</Base>

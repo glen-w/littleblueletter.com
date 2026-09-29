@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = 'Little Blue Letter',
+  description = 'A splash of uplifting ocean stuff, lovingly curated by young ocean leaders.',
+  path = Astro.url.pathname,
+} = Astro.props;
+
+const canonical = new URL(path, Astro.site).href;
+const ogImage = new URL('/logo.png', Astro.site).href;
+const umamiId =
+  (import.meta.env.PUBLIC_UMAMI_WEBSITE_ID as string | undefined) ||
+  '81f9fc36-a66c-405b-9543-ef9b9fb08c70';
+const umamiSrc =
+  (import.meta.env.PUBLIC_UMAMI_SRC as string | undefined) ||
+  'https://analytics.glenwright.earth/script.js';
+const glenwrightId = '591578b7-7945-4429-88b4-c1ea8bf39f9e';
+const umamiOk = Boolean(umamiId && umamiId !== glenwrightId);
+
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/archive/', label: 'Archive' },
+  { href: '/write/', label: 'Write' },
+  { href: '/contact/', label: 'Contact' },
+];
+
+function current(href: string) {
+  if (href === '/') return path === '/' || path === '';
+  return path === href || path.startsWith(href);
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === 'Little Blue Letter' ? title : `${title} · Little Blue Letter`}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {umamiOk && <script defer src={umamiSrc} data-website-id={umamiId} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="chrome">
+      <a class="wordmark" href="/">Little Blue Letter</a>
+      <nav aria-label="Primary">
+        <ul>
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={current(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site">
+      <p>
+        <a href="/archive/">Archive</a>
+        ·
+        <a href="/write/">Write</a>
+        ·
+        <a href="/contact/">Contact</a>
+        ·
+        <a href="https://glenwright.earth/projects/little_blue_letter/">About</a>
+      </p>
+      <p>littleblueletter.com · 2017–2023</p>
+    </footer>
+  </body>
+</html>

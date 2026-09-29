@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# Private ingest. Published letters and recovered images under src/ and public/ stay tracked.
+private/
+ingest/cache/
+ingest/images/
+ingest/out/
+
+# Never commit subscriber lists or raw mail, even if copied here by mistake.
+subscribers/
+**/*subscribers*.csv
+**/*contacts*.csv
+promo/
+*.mbox
