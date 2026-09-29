@@ -18,3 +18,5 @@ subscribers/
 **/*contacts*.csv
 promo/
 *.mbox
+
+scripts/__pycache__/
