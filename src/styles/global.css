@@ -208,6 +208,34 @@ a:hover {
   background: #000;
 }
 
+.subscribe-cta {
+  margin: 1.75rem auto 0;
+  max-width: 22rem;
+}
+
+.subscribe-button {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 3px;
+  background: var(--lbl-button);
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.subscribe-button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.subscribe-hint {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
 .letter h1,
 .archive h1,
 .contact h1,
