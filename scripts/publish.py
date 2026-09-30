@@ -27,11 +27,44 @@ def yaml_quote(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 
+# TinyLetter hosted several copies of the banner logo under different UUIDs.
+LOGO_URL_MARKERS = (
+    "734e28c8-c57b-4330-8dce-b8b42daa5e2b",
+    "81bb84db-2a04-4dc4-a6ba-fcc0ee829997",
+    "7f376862-3fa1-48ae-abee-928ccdec1bf9",
+)
+CANON_LOGO = "734e28c8-c57b-4330-8dce-b8b42daa5e2b.png"
+
+
 def load_map() -> dict[str, dict]:
     if not IMAGE_MAP.exists():
         return {}
     rows = json.loads(IMAGE_MAP.read_text(encoding="utf-8"))
     return {row["url"]: row for row in rows if row.get("file")}
+
+
+def is_banner_logo(url: str) -> bool:
+    return any(marker in url for marker in LOGO_URL_MARKERS)
+
+
+def resolve_image(url: str, mapping: dict[str, dict]) -> Path | None:
+    """Return the local cache/public path for an image URL."""
+    if is_banner_logo(url):
+        public_logo = PUBLIC_IMAGES / CANON_LOGO
+        if public_logo.exists():
+            return public_logo
+        cached = CACHE / CANON_LOGO
+        if cached.exists():
+            return cached
+    row = mapping.get(url)
+    if not row:
+        return None
+    name = row["file"]
+    # Never let a bad inference overwrite the banner logo slot.
+    if is_banner_logo(url):
+        name = CANON_LOGO
+    src = CACHE / name
+    return src if src.exists() else None
 
 
 def rewrite(html: str, mapping: dict[str, dict], dest_prefix: str, copied: set[str]) -> tuple[str, int]:
@@ -44,15 +77,11 @@ def rewrite(html: str, mapping: dict[str, dict], dest_prefix: str, copied: set[s
         if not url_match:
             return tag
         url = url_match.group(1).replace("&amp;", "&")
-        row = mapping.get(url)
-        if not row:
+        src = resolve_image(url, mapping)
+        if not src:
             missing += 1
             return ""
-        name = row["file"]
-        src = CACHE / name
-        if not src.exists():
-            missing += 1
-            return ""
+        name = CANON_LOGO if is_banner_logo(url) else src.name
         if name not in copied:
             PUBLIC_IMAGES.mkdir(parents=True, exist_ok=True)
             JEKYLL_IMAGES.mkdir(parents=True, exist_ok=True)

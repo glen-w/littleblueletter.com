@@ -6,7 +6,12 @@ const letters = (await getCollection('letters')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
-const LOGO_MARKERS = ['734e28c8-c57b-4330-8dce-b8b42daa5e2b', '/logo.png'];
+const LOGO_MARKERS = [
+  '734e28c8-c57b-4330-8dce-b8b42daa5e2b',
+  '81bb84db-2a04-4dc4-a6ba-fcc0ee829997',
+  '7f376862-3fa1-48ae-abee-928ccdec1bf9',
+  '/logo.png',
+];
 
 function thumbFromBody(body: string | undefined): string {
   if (!body) return '/logo.png';
