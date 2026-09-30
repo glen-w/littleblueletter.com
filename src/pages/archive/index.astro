@@ -6,6 +6,21 @@ const letters = (await getCollection('letters')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
+const LOGO_MARKERS = ['734e28c8-c57b-4330-8dce-b8b42daa5e2b', '/logo.png'];
+
+function thumbFromBody(body: string | undefined): string {
+  if (!body) return '/logo.png';
+  const re = /src=["']([^"']+)["']/gi;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(body))) {
+    const src = match[1];
+    if (!LOGO_MARKERS.some((marker) => src.includes(marker))) {
+      return src;
+    }
+  }
+  return '/logo.png';
+}
+
 function sent(d: Date) {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
@@ -24,8 +39,20 @@ function sent(d: Date) {
         {
           letters.map((letter) => (
             <li>
-              <a href={`/archive/${letter.data.originalSlug}/`}>{letter.data.title}</a>
-              <time datetime={letter.data.date.toISOString().slice(0, 10)}>{sent(letter.data.date)}</time>
+              <div class="meta">
+                <a href={`/archive/${letter.data.originalSlug}/`}>{letter.data.title}</a>
+                <time datetime={letter.data.date.toISOString().slice(0, 10)}>
+                  {sent(letter.data.date)}
+                </time>
+              </div>
+              <img
+                class="thumb"
+                src={thumbFromBody(letter.body)}
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+              />
             </li>
           ))
         }

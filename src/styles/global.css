@@ -60,10 +60,15 @@ a:hover {
 }
 
 .chrome .wordmark {
-  color: var(--lbl-sea);
-  font-family: Monaco, "Lucida Console", monospace;
-  font-size: 1.4rem;
+  display: inline-block;
   text-decoration: none;
+  line-height: 0;
+}
+
+.chrome .wordmark img {
+  width: 56px;
+  height: auto;
+  display: block;
 }
 
 .chrome nav {
@@ -94,18 +99,6 @@ a:hover {
   text-underline-offset: 0.2em;
 }
 
-.site {
-  text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 0.85rem;
-  color: #555;
-  padding: 0 1rem 2.5rem;
-}
-
-.site a {
-  color: var(--lbl-link);
-}
-
 .sep {
   margin: 0 0.45rem;
   color: #999;
@@ -126,7 +119,7 @@ a:hover {
 }
 
 .wrap {
-  width: min(540px, 96%);
+  width: min(var(--lbl-max), 96%);
   margin: 1.5rem auto 4rem;
 }
 
@@ -155,6 +148,64 @@ a:hover {
 .quiet {
   color: #333;
   font-size: 0.95rem;
+}
+
+.listmonk-form {
+  margin: 1.75rem auto 0;
+  max-width: 22rem;
+  text-align: left;
+}
+
+.listmonk-form h3 {
+  margin: 0 0 0.75rem;
+  font-family: Monaco, "Lucida Console", monospace;
+  font-weight: normal;
+  font-size: 1.15rem;
+  color: var(--lbl-sea);
+  text-align: center;
+}
+
+.listmonk-form p {
+  margin: 0 0 0.75rem;
+}
+
+.listmonk-form input[type="email"],
+.listmonk-form input[type="text"] {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.listmonk-form input[type="checkbox"] {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.listmonk-form label {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.listmonk-form input[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.6rem 1rem;
+  border: 0;
+  border-radius: 3px;
+  background: var(--lbl-button);
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.listmonk-form input[type="submit"]:hover {
+  background: #000;
 }
 
 .letter h1,
@@ -190,7 +241,16 @@ a:hover {
 }
 
 .archive-list li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
   margin: 0.85rem 0;
+}
+
+.archive-list .meta {
+  flex: 1;
+  min-width: 0;
 }
 
 .archive-list time {
@@ -198,6 +258,15 @@ a:hover {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
   color: #555;
+}
+
+.archive-list .thumb {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 2px;
+  background: #f0f0f0;
 }
 
 .footer-links {

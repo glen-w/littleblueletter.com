@@ -24,10 +24,14 @@ const umamiSrc =
 const glenwrightId = '591578b7-7945-4429-88b4-c1ea8bf39f9e';
 const umamiOk = Boolean(umamiId && umamiId !== glenwrightId);
 
+const favicon =
+  "data:image/svg+xml," +
+  encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="80">🐋</text></svg>');
+
 const nav = [
   { href: '/', label: 'Home' },
+  { href: '/write/', label: 'Author Sign-up' },
   { href: '/archive/', label: 'Archive' },
-  { href: '/write/', label: 'Write' },
   { href: '/contact/', label: 'Contact' },
 ];
 
@@ -45,7 +49,7 @@ function current(href: string) {
     <title>{title === 'Little Blue Letter' ? title : `${title} · Little Blue Letter`}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" href={favicon} type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -59,7 +63,9 @@ function current(href: string) {
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="chrome">
-      <a class="wordmark" href="/">Little Blue Letter</a>
+      <a class="wordmark" href="/">
+        <img src="/logo.png" alt="Little Blue Letter" width="56" height="56" />
+      </a>
       <nav aria-label="Primary">
         <ul>
           {
@@ -77,17 +83,5 @@ function current(href: string) {
     <main id="main">
       <slot />
     </main>
-    <footer class="site">
-      <p>
-        <a href="/archive/">Archive</a>
-        ·
-        <a href="/write/">Write</a>
-        ·
-        <a href="/contact/">Contact</a>
-        ·
-        <a href="https://glenwright.earth/projects/little_blue_letter/">About</a>
-      </p>
-      <p>littleblueletter.com · 2017–2023</p>
-    </footer>
   </body>
 </html>

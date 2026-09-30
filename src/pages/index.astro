@@ -10,21 +10,36 @@ import Base from '../layouts/Base.astro';
   <div class="wrap">
     <div class="card home">
       <img class="logo" src="/logo.png" alt="Little Blue Letter" />
-      <h1 class="title">Little Blue Letter</h1>
       <p class="tagline">
         A splash of uplifting ocean stuff, lovingly curated by young ocean leaders &amp; shipped
         straight to your inbox every Friday.
       </p>
-      <p class="quiet">The mailing list is not open yet.</p>
-      <p class="footer-links">
-        <a href="https://twitter.com/littlebluelette">Twitter</a>
-        <span class="sep" aria-hidden="true">|</span>
-        <a href="/archive/">Archive</a>
-        <span class="sep" aria-hidden="true">|</span>
-        <a href="/write/">Write</a>
-        <span class="sep" aria-hidden="true">|</span>
-        <a href="/contact/">Contact</a>
-      </p>
+      <form
+        method="post"
+        action="https://lists.littleblueletter.com/subscription/form"
+        class="listmonk-form"
+      >
+        <div>
+          <h3>Subscribe</h3>
+          <input type="hidden" name="nonce" />
+
+          <p><input type="email" name="email" required placeholder="E-mail" /></p>
+          <p><input type="text" name="name" placeholder="Name (optional)" /></p>
+
+          <p>
+            <input
+              id="723ab"
+              type="checkbox"
+              name="l"
+              checked
+              value="723abba4-3024-4d97-858e-69f7f33d2e27"
+            />
+            <label for="723ab">Opt-in list</label>
+          </p>
+
+          <input type="submit" value="Subscribe " />
+        </div>
+      </form>
     </div>
   </div>
 </Base>
