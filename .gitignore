@@ -20,3 +20,7 @@ promo/
 *.mbox
 
 scripts/__pycache__/
+
+# Local recovery / sync helpers (machine-specific paths; not part of the site build)
+scripts/recover_*.py
+scripts/sync_*.py
