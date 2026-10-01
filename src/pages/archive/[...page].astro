@@ -2,16 +2,16 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
-const letters = (await getCollection('letters')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const letters = (await getCollection('letters')).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+  return paginate(letters, { pageSize: 10 });
+}
 
-const ITEMS_PER_PAGE = 10;
-const currentPage = Math.max(1, parseInt(Astro.url.searchParams.get('page') || '1'));
-const totalPages = Math.ceil(letters.length / ITEMS_PER_PAGE);
-const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-const endIdx = startIdx + ITEMS_PER_PAGE;
-const paginatedLetters = letters.slice(startIdx, endIdx);
+const { page } = Astro.props;
+const pageHref = (n: number) => (n === 1 ? '/archive/' : `/archive/${n}/`);
+const pageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
 
 const LOGO_MARKERS = [
   '734e28c8-c57b-4330-8dce-b8b42daa5e2b',
@@ -46,10 +46,9 @@ function sent(d: Date) {
   <div class="wrap">
     <article class="card archive">
       <h1>Archive</h1>
-      <p>{letters.length} letters.</p>
-      <ol class="archive-list" start={startIdx + 1}>
+      <ol class="archive-list" start={page.start + 1}>
         {
-          paginatedLetters.map((letter) => (
+          page.data.map((letter) => (
             <li>
               <div class="meta">
                 <a href={`/archive/${letter.data.originalSlug}/`}>{letter.data.title}</a>
@@ -69,55 +68,47 @@ function sent(d: Date) {
           ))
         }
       </ol>
-      <nav class="pagination" aria-label="Pagination">
-        <div class="pagination-controls">
-          {currentPage > 1 && (
-            <a href={currentPage === 2 ? '/archive/' : `/archive/?page=${currentPage - 1}`} class="btn-nav">
-              ← Previous
-            </a>
-          )}
-          <span class="page-info">Page {currentPage} of {totalPages}</span>
-          {currentPage < totalPages && (
-            <a href={`/archive/?page=${currentPage + 1}`} class="btn-nav">
-              Next →
-            </a>
-          )}
-        </div>
-      </nav>
+      {
+        page.lastPage > 1 && (
+          <nav class="pagination" aria-label="Pagination">
+            {page.url.prev && <a href={page.url.prev}>← Previous</a>}
+            {pageNumbers.map((n) =>
+              n === page.currentPage ? (
+                <span class="current" aria-current="page">{n}</span>
+              ) : (
+                <a href={pageHref(n)}>{n}</a>
+              ),
+            )}
+            {page.url.next && <a href={page.url.next}>Next →</a>}
+          </nav>
+        )
+      }
     </article>
   </div>
 
 <style>
   .pagination {
     margin-top: 2rem;
-    border-top: 1px solid var(--border);
     padding-top: 1.5rem;
-  }
-
-  .pagination-controls {
+    border-top: 1px solid var(--lbl-field);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
   }
 
-  .page-info {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-  }
-
-  .btn-nav {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+  .pagination a,
+  .pagination .current {
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--lbl-field);
+    border-radius: 3px;
     text-decoration: none;
-    color: inherit;
-    transition: background-color 0.2s;
   }
 
-  .btn-nav:hover {
-    background-color: var(--bg-hover);
+  .pagination .current {
+    background: var(--lbl-button);
+    border-color: var(--lbl-button);
+    color: var(--lbl-paper);
   }
 </style>
-</Base>
