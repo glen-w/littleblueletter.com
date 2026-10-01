@@ -24,9 +24,7 @@ const umamiSrc =
 const glenwrightId = '591578b7-7945-4429-88b4-c1ea8bf39f9e';
 const umamiOk = Boolean(umamiId && umamiId !== glenwrightId);
 
-const favicon =
-  "data:image/svg+xml," +
-  encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="80">🐋</text></svg>');
+const favicon = '/favicon.png';
 
 const subscribeUrl = 'https://lists.littleblueletter.com/subscription/form';
 
@@ -53,7 +51,7 @@ function current(href: string) {
     <title>{title === 'Little Blue Letter' ? title : `${title} · Little Blue Letter`}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href={favicon} type="image/svg+xml" />
+    <link rel="icon" href={favicon} type="image/png" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

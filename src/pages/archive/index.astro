@@ -6,6 +6,13 @@ const letters = (await getCollection('letters')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
+const ITEMS_PER_PAGE = 10;
+const currentPage = Math.max(1, parseInt(Astro.url.searchParams.get('page') || '1'));
+const totalPages = Math.ceil(letters.length / ITEMS_PER_PAGE);
+const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+const endIdx = startIdx + ITEMS_PER_PAGE;
+const paginatedLetters = letters.slice(startIdx, endIdx);
+
 const LOGO_MARKERS = [
   '734e28c8-c57b-4330-8dce-b8b42daa5e2b',
   '81bb84db-2a04-4dc4-a6ba-fcc0ee829997',
@@ -39,10 +46,10 @@ function sent(d: Date) {
   <div class="wrap">
     <article class="card archive">
       <h1>Archive</h1>
-      <p>{letters.length} letters, October 2017 to March 2023.</p>
-      <ol class="archive-list">
+      <p>{letters.length} letters.</p>
+      <ol class="archive-list" start={startIdx + 1}>
         {
-          letters.map((letter) => (
+          paginatedLetters.map((letter) => (
             <li>
               <div class="meta">
                 <a href={`/archive/${letter.data.originalSlug}/`}>{letter.data.title}</a>
@@ -62,6 +69,55 @@ function sent(d: Date) {
           ))
         }
       </ol>
+      <nav class="pagination" aria-label="Pagination">
+        <div class="pagination-controls">
+          {currentPage > 1 && (
+            <a href={currentPage === 2 ? '/archive/' : `/archive/?page=${currentPage - 1}`} class="btn-nav">
+              ← Previous
+            </a>
+          )}
+          <span class="page-info">Page {currentPage} of {totalPages}</span>
+          {currentPage < totalPages && (
+            <a href={`/archive/?page=${currentPage + 1}`} class="btn-nav">
+              Next →
+            </a>
+          )}
+        </div>
+      </nav>
     </article>
   </div>
+
+<style>
+  .pagination {
+    margin-top: 2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .page-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .btn-nav {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+  }
+
+  .btn-nav:hover {
+    background-color: var(--bg-hover);
+  }
+</style>
 </Base>
