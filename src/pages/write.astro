@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 
+const signupSheetUrl =
+  'https://docs.google.com/spreadsheets/d/1sMP_UmzB7Fb_SaUf3JWwVCtHyxsMyBOVJUVzAclZ2WM/edit?usp=sharing';
+
 const mailto =
   'mailto:glen.w.wright@gmail.com?subject=' +
   encodeURIComponent('Little Blue Letter — author signup');
@@ -14,9 +17,15 @@ const mailto =
   <div class="wrap">
     <article class="card write">
       <h1>Author Sign-up</h1>
-      <p>
-        Fancy writing an edition? <a href={mailto}>Send us an email</a>!
-      </p>
+      <p>Fancy writing an edition?</p>
+      <ul>
+        <li>
+          <a href={signupSheetUrl} target="_blank" rel="noopener noreferrer">Sign-up sheet</a>
+        </li>
+        <li>
+          <a href={mailto}>Send us an email!</a>
+        </li>
+      </ul>
     </article>
   </div>
 </Base>
