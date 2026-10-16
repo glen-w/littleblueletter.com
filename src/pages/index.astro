@@ -1,7 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
+import testimonialsData from '../data/testimonials.json';
 
 const subscribeUrl = 'https://lists.littleblueletter.com/subscription/form';
+const testimonials = testimonialsData.testimonials;
+const firstTestimonial = testimonials[0];
 ---
 
 <Base
@@ -25,7 +28,98 @@ const subscribeUrl = 'https://lists.littleblueletter.com/subscription/form';
           Subscribe
         </a>
       </p>
-      <p class="quiet subscribe-hint">Opens in a new tab. Close it when you&apos;re done.</p>
+      <section
+        class="testimonial-carousel"
+        aria-label="What readers say"
+        data-testimonials={JSON.stringify(testimonials.map((t) => t.quote))}
+      >
+        <div class="testimonial-stage">
+          <button
+            type="button"
+            class="testimonial-nav"
+            data-testimonial-prev
+            aria-label="Previous quote"
+          >
+            ‹
+          </button>
+          <figure class="testimonial-slide">
+            <blockquote data-testimonial-quote>
+              “{firstTestimonial.quote}”
+            </blockquote>
+          </figure>
+          <button
+            type="button"
+            class="testimonial-nav"
+            data-testimonial-next
+            aria-label="Next quote"
+          >
+            ›
+          </button>
+        </div>
+        <p class="testimonial-status" data-testimonial-status aria-live="polite">
+          1 / {testimonials.length}
+        </p>
+      </section>
     </div>
   </div>
 </Base>
+
+<script>
+  const root = document.querySelector('.testimonial-carousel');
+  if (root) {
+    const items = JSON.parse(root.dataset.testimonials || '[]') as string[];
+    const quoteEl = root.querySelector('[data-testimonial-quote]');
+    const statusEl = root.querySelector('[data-testimonial-status]');
+    const prevBtn = root.querySelector('[data-testimonial-prev]');
+    const nextBtn = root.querySelector('[data-testimonial-next]');
+
+    let index = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function clearTimer() {
+      if (timer !== undefined) {
+        clearInterval(timer);
+        timer = undefined;
+      }
+    }
+
+    function render() {
+      if (!items.length) return;
+      index = (index % items.length + items.length) % items.length;
+      const quote = items[index];
+      if (quoteEl) quoteEl.textContent = `“${quote}”`;
+      if (statusEl) statusEl.textContent = `${index + 1} / ${items.length}`;
+      const disabled = items.length < 2;
+      if (prevBtn instanceof HTMLButtonElement) prevBtn.disabled = disabled;
+      if (nextBtn instanceof HTMLButtonElement) nextBtn.disabled = disabled;
+    }
+
+    function startTimer() {
+      clearTimer();
+      if (reducedMotion || items.length < 2) return;
+      timer = setInterval(() => {
+        index += 1;
+        render();
+      }, 5000);
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      index -= 1;
+      render();
+      startTimer();
+    });
+    nextBtn?.addEventListener('click', () => {
+      index += 1;
+      render();
+      startTimer();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearTimer();
+      else startTimer();
+    });
+
+    render();
+    startTimer();
+  }
+</script>
