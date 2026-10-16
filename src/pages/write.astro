@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import authorsData from '../data/authors.json';
 
 const signupSheetUrl =
   'https://docs.google.com/spreadsheets/d/1sMP_UmzB7Fb_SaUf3JWwVCtHyxsMyBOVJUVzAclZ2WM/edit?usp=sharing';
@@ -10,13 +11,13 @@ const mailto =
 ---
 
 <Base
-  title="Author Sign-up"
+  title="Authors"
   description="Curate a Little Blue Letter."
   path="/write/"
 >
   <div class="wrap">
     <article class="card write">
-      <h1>Author Sign-up</h1>
+      <h1>Authors</h1>
       <p>Fancy writing an edition?</p>
       <ul>
         <li>
@@ -25,6 +26,24 @@ const mailto =
         <li>
           <a href={mailto}>Send us an email!</a>
         </li>
+      </ul>
+      <p class="author-wall-intro">
+        Little Blue Letter has been written by {authorsData.count} authors
+      </p>
+      <ul class="author-wall" aria-hidden="true">
+        {authorsData.faces.map((face) => (
+          <li>
+            <img
+              src={face.src}
+              alt=""
+              width="36"
+              height="36"
+              loading="lazy"
+              decoding="async"
+              style={`object-position: ${face.position}`}
+            />
+          </li>
+        ))}
       </ul>
     </article>
   </div>
