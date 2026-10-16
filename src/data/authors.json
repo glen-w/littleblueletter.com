@@ -1,149 +1,177 @@
 {
-  "count": 37,
+  "count": 36,
   "faces": [
     {
-      "src": "/images/authors/little_blue_letter_authors_1.jpg",
-      "position": "center"
+      "src": "/images/authors/aneika-angus.jpg",
+      "position": "center",
+      "name": "Aneika Angus"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_2.png",
-      "position": "center"
+      "src": "/images/authors/beatrice-gorez.png",
+      "position": "center",
+      "name": "Beatrice Gorez"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_3.jpg",
-      "position": "center 20%"
+      "src": "/images/authors/irina-chemshirova.jpg",
+      "position": "center 20%",
+      "name": "Irina Chemshirova"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_4.png",
-      "position": "center"
+      "src": "/images/authors/caitie-kuempel.png",
+      "position": "center",
+      "name": "Caitie Kuempel"
     },
     {
       "src": "/images/authors/little_blue_letter_authors_5.png",
       "position": "center"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_6.png",
-      "position": "center"
+      "src": "/images/authors/louisa-casson.png",
+      "position": "center",
+      "name": "Louisa Casson"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_7.png",
-      "position": "center"
+      "src": "/images/authors/abigail-leadbeater.png",
+      "position": "center",
+      "name": "Abigail Leadbeater"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_8.png",
-      "position": "center"
+      "src": "/images/authors/hannah-gilchrist.png",
+      "position": "center",
+      "name": "Hannah Gilchrist"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_9.png",
-      "position": "center"
+      "src": "/images/authors/katie-oreilly.png",
+      "position": "center",
+      "name": "Katie O’Reilly"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_10.png",
-      "position": "center"
+      "src": "/images/authors/dr-emma-mcintosh.png",
+      "position": "center",
+      "name": "Dr Emma McIntosh"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_11.png",
-      "position": "center 25%"
+      "src": "/images/authors/brad-davidson-and-daisy-kendrick.png",
+      "position": "center 25%",
+      "name": "Brad Davidson and Daisy Kendrick"
     },
     {
       "src": "/images/authors/little_blue_letter_authors_12.png",
       "position": "center"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_13.png",
-      "position": "center"
+      "src": "/images/authors/aria-ritz-finkelstein.png",
+      "position": "center",
+      "name": "Aria Ritz Finkelstein"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_14.png",
-      "position": "center"
+      "src": "/images/authors/theissa-meira.png",
+      "position": "center",
+      "name": "Theissa Meira"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_15.png",
-      "position": "center"
+      "src": "/images/authors/octavia-burghelea.png",
+      "position": "center",
+      "name": "Octavia Burghelea"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_16.png",
-      "position": "center"
+      "src": "/images/authors/leonie-meier-2.png",
+      "position": "center",
+      "name": "Leonie Meier"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_17.png",
-      "position": "center"
+      "src": "/images/authors/yana-prokofyeva.png",
+      "position": "center",
+      "name": "Yana Prokofyeva"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_18.png",
-      "position": "center 20%"
+      "src": "/images/authors/charlie-young.png",
+      "position": "center 20%",
+      "name": "Charlie Young"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_19.png",
-      "position": "center 20%"
+      "src": "/images/authors/ngaio-bowthorpe.png",
+      "position": "center 20%",
+      "name": "Ngaio Bowthorpe"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_20.png",
-      "position": "center"
+      "src": "/images/authors/donalda-karnauskaite.png",
+      "position": "center",
+      "name": "Donalda Karnauskaite"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_21.jpg",
-      "position": "center"
+      "src": "/images/authors/hanna-dijkstra.jpg",
+      "position": "center",
+      "name": "Hanna Dijkstra"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_22.jpg",
-      "position": "center 20%"
+      "src": "/images/authors/isabel-seeger.jpg",
+      "position": "center 20%",
+      "name": "Isabel Seeger"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_23.png",
-      "position": "center"
+      "src": "/images/authors/jane-eva-collins.png",
+      "position": "center",
+      "name": "Jane Eva Collins"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_24.png",
-      "position": "center"
+      "src": "/images/authors/joelle-philippe.png",
+      "position": "center",
+      "name": "Joëlle Philippe"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_25.jpg",
-      "position": "center"
+      "src": "/images/authors/kati-timar.jpg",
+      "position": "center",
+      "name": "Kati Timar"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_26.png",
-      "position": "center"
+      "src": "/images/authors/leonie-meier.png",
+      "position": "center",
+      "name": "Leonie Meier"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_27.png",
-      "position": "center"
+      "src": "/images/authors/lucy-erickson.png",
+      "position": "center",
+      "name": "Lucy Erickson"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_28.jpg",
-      "position": "center 15%"
+      "src": "/images/authors/ludovica-di-renzo.jpg",
+      "position": "center 15%",
+      "name": "Ludovica Di Renzo"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_29.png",
-      "position": "center"
+      "src": "/images/authors/martina-mazzucato.png",
+      "position": "center",
+      "name": "Martina Mazzucato"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_30.png",
-      "position": "center"
-    },
-    {
-      "src": "/images/authors/little_blue_letter_authors_31.png",
-      "position": "center 30%"
+      "src": "/images/authors/olga-mironenko.png",
+      "position": "center 30%",
+      "name": "Olga Mironenko"
     },
     {
       "src": "/images/authors/little_blue_letter_authors_32.png",
       "position": "center 12%"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_33.png",
-      "position": "center 12%"
+      "src": "/images/authors/clara-bonaventura.png",
+      "position": "center 12%",
+      "name": "Clara Bonaventura"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_34.jpg",
-      "position": "center"
+      "src": "/images/authors/rosie-chambers.jpg",
+      "position": "center",
+      "name": "Rosie Chambers"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_35.jpg",
-      "position": "center"
+      "src": "/images/authors/selene-suau.jpg",
+      "position": "center",
+      "name": "Selene Suau"
     },
     {
-      "src": "/images/authors/little_blue_letter_authors_36.jpg",
-      "position": "center"
+      "src": "/images/authors/dj-tyson.jpg",
+      "position": "center",
+      "name": "Dj Tyson"
     },
     {
       "src": "/images/authors/little_blue_letter_authors_37.jpg",

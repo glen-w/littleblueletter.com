@@ -25,3 +25,4 @@ scripts/__pycache__/
 scripts/recover_*.py
 scripts/sync_*.py
 scripts/compress_authors.py
+scripts/identify_authors.py
