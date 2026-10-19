@@ -9,7 +9,7 @@ const letters = defineCollection({
     description: z.string().optional().default(''),
     quote: z.string().optional().default(''),
     attribution: z.string().optional().default(''),
-    source: z.literal('tinyletter'),
+    source: z.enum(['tinyletter', 'listmonk']),
     originalSlug: z.string(),
   }),
 });

@@ -14,6 +14,12 @@ npm run dev
 
 Letters live in `src/content/letters/` (from the TinyLetter extract + personal-site publish path). Images in `public/images/letters/`.
 
+**ListMonk (current sends):** draft in `drafts/YYYY-MM-DD.md`, follow [docs/listmonk-markup.md](docs/listmonk-markup.md) and [docs/newsletter-workflow.md](docs/newsletter-workflow.md). Lint before paste:
+
+```sh
+python3 scripts/lint_listmonk_issue.py drafts/2026-10-16.md --check-images
+```
+
 Optional ingest scripts (Syncthing `content/`, Wayback):
 
 ```sh
