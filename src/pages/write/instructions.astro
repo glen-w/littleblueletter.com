@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const templateUrl =
+  'https://docs.google.com/document/d/18y_xQoj1MG0fgexS754-vcF1TN2MfYc2GYY9ep0aMzY/edit';
+const signupSheetUrl =
+  'https://docs.google.com/spreadsheets/d/1sMP_UmzB7Fb_SaUf3JWwVCtHyxsMyBOVJUVzAclZ2WM/edit?usp=sharing';
+const mailto =
+  'mailto:glen.w.wright@gmail.com?subject=' +
+  encodeURIComponent('Little Blue Letter — edition draft');
+---
+
+<Base
+  title="How to write an edition"
+  description="Content, length, and submission notes for Little Blue Letter authors."
+  path="/write/instructions/"
+>
+  <div class="wrap">
+    <article class="card write instructions">
+      <p class="crumb"><a href="/write/">Authors</a></p>
+      <h1>How to write an edition</h1>
+      <p>
+        Little Blue Letter is a Friday splash of uplifting ocean stuff — not a briefing, not a
+        literature review. Skim a few issues in the <a href="/archive/">archive</a> first, then
+        send something short, cheerful, and easy to edit.
+      </p>
+
+      <h2>How long?</h2>
+      <p>
+        There is no hard word limit. Looking at the story text of 90 past issues (quotes, gif
+        captions, credits, and bios left out), a typical edition sits around
+        <strong>300–450 words</strong>. The median is about 335. Recent issues have run a bit
+        longer, about <strong>350–550 words</strong>.
+      </p>
+      <p>
+        If your draft is heading past <strong>600 words</strong> of prose, trim. Readers should
+        be able to finish it with a cup of tea before the kettle cools.
+      </p>
+      <ul>
+        <li>
+          <strong>Ocean updates</strong> — 3 or 4 items. Each is usually one short paragraph of
+          <strong>80–120 words</strong> (sometimes two very short ones). Most past story blocks
+          land between 60 and 160 words.
+        </li>
+        <li>
+          <strong>Optional extras</strong> — one or two, if you like. A couple of bullets or
+          about <strong>50–80 words</strong> each is plenty.
+        </li>
+        <li>
+          Bullet points are fine. A finished draft is lovely; a well-chosen pile of notes is
+          also enough.
+        </li>
+      </ul>
+
+      <h2>What to send</h2>
+      <ol>
+        <li>
+          Copy the
+          <a href={templateUrl} target="_blank" rel="noopener noreferrer">Google Doc template</a>
+          (or just email the same pieces).
+        </li>
+        <li>
+          Fill in the sections below. Keep it concise, uplifting, and a little light-hearted.
+        </li>
+        <li>
+          Put everything in <a href={mailto}>one email to glen.w.wright@gmail.com</a> — draft or
+          bullets, links, images or gif URLs, and a two-sentence bio.
+        </li>
+      </ol>
+      <p>
+        Claim a Friday on the
+        <a href={signupSheetUrl} target="_blank" rel="noopener noreferrer">sign-up sheet</a>
+        if you have not already.
+      </p>
+
+      <h2>The pieces</h2>
+      <h3>A quote</h3>
+      <p>
+        An inspirational ocean line — preferably not too cheesy — plus who said it. We can help
+        if you are stuck.
+      </p>
+
+      <h3>Ocean update</h3>
+      <p>
+        Three or four short items on current or recent ocean news and research. Aim for a
+        positive angle, or a promising / interesting way through a gloomy problem. Link the
+        source. A photo with a credit is welcome but not required.
+      </p>
+
+      <h3>Gif of the week</h3>
+      <p>
+        An ocean-themed animated gif
+        (<a href="https://giphy.com/" target="_blank" rel="noopener noreferrer">Giphy</a> is
+        fine) and one short sentence of explanation if it needs one.
+      </p>
+
+      <h3>Optional extras — pick one or two</h3>
+      <ul>
+        <li>
+          <strong>Ocean Optimism</strong> — one or two very short success stories, innovations,
+          or conservation projects.
+        </li>
+        <li>
+          <strong>Further reading / In the literature</strong> — a couple of papers or longer
+          articles, each with a one- or two-sentence plain-language note.
+        </li>
+        <li>
+          <strong>Book of the week</strong> — an ocean-y book you recently read and enjoyed.
+        </li>
+        <li>
+          <strong>Meanwhile, on land</strong> — a scrap of general news that still touches the
+          ocean (pollution, economics, policy, and so on).
+        </li>
+        <li>
+          <strong>Opportunities</strong> — a youth summit, a fellowship, a job, a deadline.
+        </li>
+      </ul>
+
+      <h3>Your bio</h3>
+      <p>
+        Two or three sentences: <em>Little Blue Letter was curated this week by [full name].
+        [First name] is [role] at [place]. [A line about research, interests, or why the ocean
+        has you.]</em> A portrait helps if you have one to hand.
+      </p>
+
+      <h2>Tone</h2>
+      <ul>
+        <li>Write as if you are telling a friend something good (or at least interesting) that happened at sea this week.</li>
+        <li>Plain language. One idea per item. Emoji in headings are part of the house style.</li>
+        <li>We edit for house voice, links, and length — so do not polish yourself into a corner.</li>
+      </ul>
+    </article>
+  </div>
+</Base>

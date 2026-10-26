@@ -5,9 +5,8 @@ import authorsData from '../data/authors.json';
 const signupSheetUrl =
   'https://docs.google.com/spreadsheets/d/1sMP_UmzB7Fb_SaUf3JWwVCtHyxsMyBOVJUVzAclZ2WM/edit?usp=sharing';
 
-const mailto =
-  'mailto:glen.w.wright@gmail.com?subject=' +
-  encodeURIComponent('Little Blue Letter — author signup');
+const templateUrl =
+  'https://docs.google.com/document/d/18y_xQoj1MG0fgexS754-vcF1TN2MfYc2GYY9ep0aMzY/edit';
 ---
 
 <Base
@@ -24,7 +23,10 @@ const mailto =
           <a href={signupSheetUrl} target="_blank" rel="noopener noreferrer">Sign-up sheet</a>
         </li>
         <li>
-          <a href={mailto}>Send us an email!</a>
+          <a href="/write/instructions/">Instructions / style guide</a>
+        </li>
+        <li>
+          <a href={templateUrl} target="_blank" rel="noopener noreferrer">Template</a>
         </li>
       </ul>
       <ul class="author-wall">
