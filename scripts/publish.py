@@ -9,6 +9,12 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+from archive_image_utils import (  # noqa: E402
+    is_docx_profile_placeholder,
+    placeholder_basenames,
+    strip_docx_profile_placeholders,
+)
 ISSUES = ROOT / "archive" / "issues"
 MANIFEST = ROOT / "archive" / "manifest.json"
 IMAGE_MAP = ROOT / "ingest" / "out" / "image_map.json"
@@ -64,7 +70,11 @@ def resolve_image(url: str, mapping: dict[str, dict]) -> Path | None:
     if is_banner_logo(url):
         name = CANON_LOGO
     src = CACHE / name
-    return src if src.exists() else None
+    if not src.exists():
+        return None
+    if is_docx_profile_placeholder(src):
+        return None
+    return src
 
 
 def rewrite(html: str, mapping: dict[str, dict], dest_prefix: str, copied: set[str]) -> tuple[str, int]:
@@ -91,6 +101,7 @@ def rewrite(html: str, mapping: dict[str, dict], dest_prefix: str, copied: set[s
         return re.sub(r'src="https?://[^"]+"', f'src="{dest_prefix}{name}"', tag, count=1)
 
     html = re.sub(r"<img\b[^>]*>", repl, html, flags=re.I)
+    html = strip_docx_profile_placeholders(html, placeholder_basenames(PUBLIC_IMAGES))
     return stack_images(html), missing
 
 

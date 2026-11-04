@@ -20,6 +20,8 @@ from urllib.parse import unquote, urlparse
 import requests
 
 ROOT = Path(__file__).resolve().parents[1]
+
+from archive_image_utils import DOCX_PROFILE_PLACEHOLDER_SHA256  # noqa: E402
 ISSUES = ROOT / "archive" / "issues"
 MANIFEST = ROOT / "archive" / "manifest.json"
 CACHE = ROOT / "ingest" / "images"
@@ -139,6 +141,10 @@ def cache_name_for(url: str) -> str:
 
 def hash_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def is_docx_profile_placeholder_bytes(data: bytes) -> bool:
+    return hash_bytes(data) == DOCX_PROFILE_PLACEHOLDER_SHA256
 
 
 def hash_file(path: Path) -> str:
@@ -384,6 +390,8 @@ def local_hashes() -> dict[str, str]:
                         data = archive.read(name)
                         if len(data) < MIN_BYTES:
                             continue
+                        if is_docx_profile_placeholder_bytes(data):
+                            continue
                         found.setdefault(hash_bytes(data), f"docx:{path.name}")
             except zipfile.BadZipFile:
                 continue
@@ -450,6 +458,8 @@ def build_local_pool() -> list[LocalAsset]:
                     data = archive.read(name)
                     if len(data) < MIN_BYTES:
                         continue
+                    if is_docx_profile_placeholder_bytes(data):
+                        continue
                     ext = Path(name).suffix.lower() or ".png"
                     digest = hash_bytes(data)[:16]
                     cache_path = CACHE / f"docx-{path.stem[:40]}-{digest}{ext}"
@@ -506,6 +516,8 @@ def docx_media_for(path: Path) -> list[LocalAsset]:
                     continue
                 data = archive.read(name)
                 if len(data) < MIN_BYTES:
+                    continue
+                if is_docx_profile_placeholder_bytes(data):
                     continue
                 ext = Path(name).suffix.lower() or ".png"
                 digest = hash_bytes(data)[:16]
