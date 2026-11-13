@@ -23,7 +23,7 @@ Repeat for each story block. Optional recurring blocks:
 | Grants / jobs | `**🎯 Opportunities**` |
 | Book | `**📚 Book of the Week — [*Title*](amazon-url), by Author(s)**` |
 | Papers | `**📄 In the Literature**` then bullets with bold linked titles |
-| Gif | `**🐙 Gif of the Week**` then centered image (200px) |
+| Gif | `**🐙 Gif of the Week**` then centered image (400px) |
 
 ## Links
 
@@ -37,10 +37,12 @@ Repeat for each story block. Optional recurring blocks:
 
 **Filename:** `YYMMDD_short_slug.ext` where `YYMMDD` is the send date (e.g. 16 Oct 2026 → `261016`). Use lowercase slugs with underscores.
 
+**Default size and layout:** Story photos and gifs use **400px width**, **centered** (`display:block; margin:0 auto;`), and `max-width:100%` for mobile. The linter enforces this on `drafts/`. Exceptions: **90px** round curator portrait (author block); **300px** book covers inside a centered `<p>`.
+
 **Story image (inline HTML):**
 
 ```html
-<img src="https://lists.littleblueletter.com/uploads/261016_example.jpg" alt="Short description" width="600" style="width:600px;max-width:100%;height:auto;" />
+<img src="https://lists.littleblueletter.com/uploads/261016_example.jpg" alt="Short description" width="400" style="display:block;width:400px;max-width:100%;height:auto;margin:0 auto;" />
 ```
 
 **Credit line (always immediately after the image):**
@@ -51,21 +53,21 @@ Repeat for each story block. Optional recurring blocks:
 
 For artwork with a title, credit line may include the title and artists; keep the same `<p style="...">` wrapper.
 
-**Book cover (300px, linked):**
+**Book cover (300px max, linked, centered):**
 
 ```html
 <p align="center" style="text-align:center;margin:0;">
   <a href="https://link.amazon/XXXXX">
-    <img src="https://lists.littleblueletter.com/uploads/261016_book_slug.jpg" alt="Book title cover" width="300" style="width:300px;max-width:100%;height:auto;border:0;" />
+    <img src="https://lists.littleblueletter.com/uploads/261016_book_slug.jpg" alt="Book title cover" width="300" style="display:block;width:300px;max-width:100%;height:auto;margin:0 auto;border:0;" />
   </a>
 </p>
 ```
 
-**Gif of the Week (200px, centered, usually not linked):**
+**Gif of the Week (400px, centered, usually not linked):**
 
 ```html
 <p align="center" style="text-align:center;margin:0;">
-  <img src="https://lists.littleblueletter.com/uploads/261016_octopus.gif" alt="Dumbo octopus" width="200" style="width:200px;max-width:100%;height:auto;" />
+  <img src="https://lists.littleblueletter.com/uploads/261016_octopus.gif" alt="Dumbo octopus" width="400" style="display:block;width:400px;max-width:100%;height:auto;margin:0 auto;" />
 </p>
 ```
 

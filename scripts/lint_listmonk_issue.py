@@ -18,6 +18,41 @@ IMG_SRC = re.compile(
     re.I,
 )
 CREDIT_STYLE = "font-size:12px;line-height:1.4;color:#666666"
+CENTERED_IMG_MARKERS = ("display:block", "margin:0 auto")
+STANDARD_STORY_WIDTH = "400"
+
+
+def _img_width(tag: str) -> str | None:
+    m = re.search(r'\bwidth="(\d+)"', tag, re.I)
+    return m.group(1) if m else None
+
+
+def lint_image_layout(text: str, path: Path) -> list[str]:
+    issues: list[str] = []
+    for m in re.finditer(r"<img\s[^>]*>", text, re.I):
+        tag = m.group(0)
+        line_no = text[: m.start()].count("\n") + 1
+        width = _img_width(tag)
+        if width == "90":
+            continue
+        if width == "300":
+            if not all(marker in tag for marker in CENTERED_IMG_MARKERS):
+                issues.append(
+                    f"{path}:{line_no}: book cover <img> should be centered "
+                    f"(display:block; margin:0 auto; in style)"
+                )
+            continue
+        if width != STANDARD_STORY_WIDTH:
+            issues.append(
+                f'{path}:{line_no}: use width="{STANDARD_STORY_WIDTH}" for story/gif '
+                f"images (see docs/listmonk-markup.md)"
+            )
+        if not all(marker in tag for marker in CENTERED_IMG_MARKERS):
+            issues.append(
+                f"{path}:{line_no}: story/gif <img> should be centered "
+                f"(display:block; margin:0 auto; in style)"
+            )
+    return issues
 
 
 def lint(text: str, path: Path) -> list[str]:
@@ -34,7 +69,9 @@ def lint(text: str, path: Path) -> list[str]:
         if BAD_RULE.match(line):
             issues.append(f"{path}:{i}: section break must be --- not --")
 
-    # After each story <img> (600px), expect a credit <p> within the next few lines.
+    issues.extend(lint_image_layout(text, path))
+
+    # After each story <img>, expect a credit <p> within the next few lines.
     for m in re.finditer(r"<img\s[^>]*>", text, re.I):
         tag = m.group(0)
         if 'width="300"' in tag or "width:300px" in tag:

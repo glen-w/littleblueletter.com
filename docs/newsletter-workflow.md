@@ -16,7 +16,7 @@ python3 scripts/lint_listmonk_issue.py drafts/2026-10-16.md
 python3 scripts/lint_listmonk_issue.py drafts/2026-10-16.md --check-images
 ```
 
-Fixes common paste errors (`@TrackLink`, `--` dividers, `##` headings, missing credit styling hints).
+Fixes common paste errors (`@TrackLink`, `--` dividers, `##` headings, missing credit styling hints, non-400px or uncentered images).
 
 ## 3. Images
 
@@ -24,6 +24,8 @@ Fixes common paste errors (`@TrackLink`, `--` dividers, `##` headings, missing c
 |-----------------|-----------|
 | `images/03-book-cover.jpg` | `261016_how_to_revive_our_ocean.jpg` |
 | Wikimedia / stock | Export or download, upload with `261016_{slug}.jpg` |
+
+In the draft HTML, use **400px width and centered** (`display:block; margin:0 auto;`) for story photos and gifs (see [listmonk-markup.md](./listmonk-markup.md)). Book covers: 300px; curator portrait: 90px.
 
 Upload via ListMonk → Media. Confirm URLs with `--check-images`.
 

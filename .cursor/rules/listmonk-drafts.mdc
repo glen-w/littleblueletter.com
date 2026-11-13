@@ -1,0 +1,15 @@
+---
+description: ListMonk issue drafts — image layout and markup
+globs: drafts/**/*.md
+alwaysApply: false
+---
+
+# ListMonk drafts
+
+When editing `drafts/` issue bodies, follow `docs/listmonk-markup.md`.
+
+**Images:** Story photos and gifs use `width="400"` with  
+`style="display:block;width:400px;max-width:100%;height:auto;margin:0 auto;"`  
+Exceptions: 90px curator portrait; 300px book covers (still centered).
+
+Run `python3 scripts/lint_listmonk_issue.py drafts/YYYY-MM-DD.md` before send.
