@@ -17,6 +17,11 @@ IMG_SRC = re.compile(
     r'src="(https://lists\.littleblueletter\.com/uploads/[^"]+)"',
     re.I,
 )
+# Outbound clickable URLs (Markdown links + href=). Image src= is excluded.
+OUTBOUND_URL = re.compile(
+    r'(?:\]\(|\bhref=["\'])(https?://[^)"\']+)',
+    re.I,
+)
 CREDIT_STYLE = "font-size:12px;line-height:1.4;color:#666666"
 CENTERED_IMG_MARKERS = ("display:block", "margin:0 auto")
 STANDARD_STORY_WIDTH = "400"
@@ -55,19 +60,41 @@ def lint_image_layout(text: str, path: Path) -> list[str]:
     return issues
 
 
-def lint(text: str, path: Path) -> list[str]:
+def lint_tracklink(text: str, path: Path) -> list[str]:
+    """Require @TrackLink on every outbound link (ListMonk paste-ready gate)."""
+    issues: list[str] = []
+    for m in OUTBOUND_URL.finditer(text):
+        url = m.group(1)
+        if url.rstrip("/").endswith("@TrackLink") or url.endswith("@TrackLink"):
+            continue
+        if TRACKLINK.search(url):
+            # Suffix present but not at end (e.g. mid-query) — still flag.
+            line_no = text[: m.start()].count("\n") + 1
+            issues.append(
+                f"{path}:{line_no}: @TrackLink must be at the end of the URL: {url[:80]}"
+            )
+            continue
+        line_no = text[: m.start()].count("\n") + 1
+        issues.append(
+            f"{path}:{line_no}: add @TrackLink suffix before ListMonk paste: {url[:80]}"
+        )
+    return issues
+
+
+def lint(text: str, path: Path, *, require_tracklink: bool = False) -> list[str]:
     issues: list[str] = []
     lines = text.splitlines()
 
     for i, line in enumerate(lines, start=1):
-        if TRACKLINK.search(line):
-            issues.append(f"{path}:{i}: remove @TrackLink from URL")
         if MARKDOWN_H2.match(line):
             issues.append(
                 f"{path}:{i}: use **emoji Title** instead of ## heading (see docs/listmonk-markup.md)"
             )
         if BAD_RULE.match(line):
             issues.append(f"{path}:{i}: section break must be --- not --")
+
+    if require_tracklink:
+        issues.extend(lint_tracklink(text, path))
 
     issues.extend(lint_image_layout(text, path))
 
@@ -121,6 +148,11 @@ def main() -> int:
         action="store_true",
         help="HEAD-request each lists.littleblueletter.com/uploads URL",
     )
+    parser.add_argument(
+        "--require-tracklink",
+        action="store_true",
+        help="Require @TrackLink on every outbound link (pre-send ListMonk paste gate)",
+    )
     args = parser.parse_args()
 
     if not args.draft.is_file():
@@ -128,7 +160,7 @@ def main() -> int:
         return 2
 
     text = args.draft.read_text(encoding="utf-8")
-    issues = lint(text, args.draft)
+    issues = lint(text, args.draft, require_tracklink=args.require_tracklink)
     if args.check_images:
         issues.extend(check_images(text, args.draft))
 

@@ -27,8 +27,19 @@ Repeat for each story block. Optional recurring blocks:
 
 ## Links
 
-- Use clean destination URLs only. Strip mail-client trackers such as `@TrackLink` before paste.
-- Amazon / affiliate: `https://link.amazon/...` as used in recent issues.
+- **ListMonk paste:** append `@TrackLink` to every outbound URL (Markdown links and `href=` alike) so ListMonk click-tracking works. Put it at the end of the URL, before the closing `)` or `"`.
+
+  ```markdown
+  [Asia-Pacific Ocean Week](https://www.unescap.org/events/2026/asia-pacific-ocean-week@TrackLink)
+  ```
+
+  ```html
+  <a href="https://www.linkedin.com/in/someone@TrackLink">Name</a>
+  ```
+
+- Do **not** put `@TrackLink` on image `src=` URLs (uploads host), only on clickable links.
+- Clean working copies in `content/YYMMDD/` and the public site archive use clean URLs (no `@TrackLink`). Add the suffix as the last step before pasting into ListMonk; strip it again when archiving to `src/content/letters/`.
+- Amazon / affiliate: `https://link.amazon/...` as used in recent issues (still add `@TrackLink` for the campaign paste).
 - Inline link text: `[agreed this week](url)`, `[Details](url)` for opportunities.
 
 ## Images
@@ -37,7 +48,9 @@ Repeat for each story block. Optional recurring blocks:
 
 **Filename:** `YYMMDD_short_slug.ext` where `YYMMDD` is the send date (e.g. 16 Oct 2026 → `261016`). Use lowercase slugs with underscores.
 
-**Default size and layout:** Story photos and gifs use **400px width**, **centered** (`display:block; margin:0 auto;`), and `max-width:100%` for mobile. The linter enforces this on `drafts/`. Exceptions: **90px** round curator portrait (author block); **300px** book covers inside a centered `<p>`.
+**Default size and layout:** Story photos and gifs use **400px width**, **centered** (`display:block; margin:0 auto;`), and `max-width:100%` for mobile. The linter enforces this on issue bodies under `content/YYMMDD/`. Exceptions: **90px** round curator portrait (author block); **300px** book covers inside a centered `<p>`.
+
+Working files live in `/Users/89298/Documents/Little Blue Letter/content/YYMMDD/` (not the repo `drafts/` folder). Copy gifs used in the issue into `content/gifs/` as well — see [newsletter-workflow.md](./newsletter-workflow.md).
 
 **Story image (inline HTML):**
 
@@ -94,4 +107,4 @@ Do not duplicate in the body fragment: full-page wrapper, unsubscribe link, subs
 
 ## Example reference
 
-See `drafts/2026-10-16.md` for a full issue following this spec. Older archived HTML under `archive/issues/` reflects the TinyLetter era (heavier inline styles); new sends should follow this document.
+See `content/261106/261106_LBL.md` (under `/Users/89298/Documents/Little Blue Letter/`) for a full issue following this spec. Older archived HTML under `archive/issues/` reflects the TinyLetter era (heavier inline styles); new sends should follow this document.
